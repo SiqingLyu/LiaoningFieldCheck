@@ -6,6 +6,7 @@ import openpyxl
 import xlrd
 import xlwt
 from xlutils.copy import copy
+from openpyxl import Workbook
 
 
 def write_excel_xls(path, sheet_name, value):
@@ -34,14 +35,16 @@ def write_excel_xls_append(path, value):
     # print("xls格式表格【追加】写入数据成功！")
 
 
-def read_excel_xls(path):
+def read_excel_xls(path, sheet_name):
     workbook = xlrd.open_workbook(path)  # 打开工作簿
     sheets = workbook.sheet_names()  # 获取工作簿中的所有表格
-    worksheet = workbook.sheet_by_name(sheets[0])  # 获取工作簿中所有表格中的的第一个表格
+    worksheet = workbook.sheet_by_name(sheet_name)  # 获取工作簿中所有表格中的的第一个表格
+    return worksheet
     # for i in range(0, worksheet.nrows):
     #     for j in range(0, worksheet.ncols):
     #         print(worksheet.cell_value(i, j), "\t", end="")  # 逐行逐列读取数据
     #     print()
+
 
 
 def write_excel_xlsx(path, sheet_name, value):
@@ -60,6 +63,7 @@ def read_excel_xlsx(path, sheet_name):
     workbook = openpyxl.load_workbook(path)
     # sheet = wb.get_sheet_by_name(sheet_name)这种方式已经弃用，不建议使用
     sheet = workbook[sheet_name]
+    return sheet
     # for row in sheet.rows:
     #     for cell in row:
     #         print(cell.value, "\t", end="")

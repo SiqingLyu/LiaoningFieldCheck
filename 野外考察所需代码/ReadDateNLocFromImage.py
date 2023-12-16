@@ -25,7 +25,11 @@ class ImageLoader:
 
     def init_data(self):
         img = exifread.process_file(open(self.img_path, 'rb'))
-        self.datetime = str(img['Image DateTime'])
+        if 'Image DateTime' in img.keys():
+            self.datetime = str(img['Image DateTime'])
+        else:
+            self.datetime = str(img['EXIF DateTime'])
+
         latitude = format_lati_long(str(img['GPS GPSLatitude']))
         longitude = format_lati_long(str(img['GPS GPSLongitude']))
         self.lat = latitude
@@ -77,6 +81,6 @@ class ImageLoader:
 
 
 if __name__ == '__main__':
-    I = ImageLoader(img_path=r'C:\Users\29010\Desktop\10002_1(6531693082115049854).jpg')
+    I = ImageLoader(img_path=r'D:\Desktop\野外\TEST\生态类型核查点\本溪市\桓仁满族自治县\M210522230920001P.jpg')
     I.print_info()
     print("The name of the image should be:", I.name_the_image())
