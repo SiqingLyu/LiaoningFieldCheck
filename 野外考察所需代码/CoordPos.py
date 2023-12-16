@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import requests
 # baidu API (Web or Service)
-AK = 'itR5SGdk7NhveovdxsxBz0VRNoEnmpxR'
+AK = '在这里填入你申请的百度地图AK码'
 
 
 def Pos2Coord(name):
